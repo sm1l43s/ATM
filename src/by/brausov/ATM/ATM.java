@@ -24,7 +24,7 @@ public class ATM {
 
     private static void printUserMenu(User curUser, Scanner scanner) {
 
-        curUser.printAccountsSumary();
+        curUser.printAccountsSummary();
 
         int choice;
 
