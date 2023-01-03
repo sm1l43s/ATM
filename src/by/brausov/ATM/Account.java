@@ -1,3 +1,5 @@
+package by.brausov.ATM;
+
 import java.util.ArrayList;
 
 public class Account {
@@ -34,15 +36,9 @@ public class Account {
      * @param bank the Bank that issues the account
      */
     public Account(String name, User holder, Bank bank) {
-
-        // set the account name and holder
         this.name = name;
         this.holder = holder;
-
-        // get a new account UUID
         this.uuid = bank.getNewAccountUUID();
-
-        // init transaction
         this.transactions = new ArrayList<>();
     }
 
@@ -59,7 +55,6 @@ public class Account {
      * @return the string summary
      */
     public String getSummaryLine() {
-
         double balance = this.getBalance();
 
         if (balance >= 0) {
@@ -74,7 +69,6 @@ public class Account {
      * @return the balance value
      */
     public double getBalance() {
-
         double balance = 0;
 
         for (Transaction t: this.transactions) {

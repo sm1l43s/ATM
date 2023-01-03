@@ -1,14 +1,23 @@
+package by.brausov.ATM;
+
 import java.util.ArrayList;
 import java.util.Random;
-
 public class Bank {
 
+    /**
+     * The name of bank.
+     */
     private final String name;
 
+    /**
+     * The list of user's for this bank.
+     */
     private final ArrayList<User> users;
 
+    /**
+     * The list of accounts for this bank
+     */
     private final ArrayList<Account> accounts;
-
 
     /**
      * Create a new Bank object with empty lists of users and accounts
@@ -25,34 +34,22 @@ public class Bank {
      * @return the uuid
      */
     public String getNewUserUUID() {
-
-        // init
-        StringBuilder uuid;
-        Random random = new Random();
-        int length = 6;
+        String uuid;
         boolean nonUnique;
 
-        // continue looping until we get a unique ID
         do {
-
-            // generate the number
-            uuid = new StringBuilder();
-            for (int i = 0; i < length; i++) {
-                uuid.append(((Integer) random.nextInt(10)));
-            }
-
-            // check to make sue it's unique
+            uuid = generateUUID(6);
             nonUnique = false;
+
             for (User u: users) {
-                if (uuid.toString().compareTo(u.getUUID()) == 0) {
+                if (uuid.compareTo(u.getUUID()) == 0) {
                     nonUnique = true;
                     break;
                 }
             }
-
         } while (nonUnique);
 
-        return uuid.toString();
+        return uuid;
     }
 
     /**
@@ -60,25 +57,14 @@ public class Bank {
      * @return the uuid
      */
     public String getNewAccountUUID() {
-        // init
-        StringBuilder uuid;
-        Random random = new Random();
-        int length = 10;
+        String uuid;
         boolean nonUnique;
 
-        // continue looping until we get a unique ID
         do {
-
-            // generate the number
-            uuid = new StringBuilder();
-            for (int i = 0; i < length; i++) {
-                uuid.append(((Integer) random.nextInt(10)));
-            }
-
-            // check to make sue it's unique
+            uuid = generateUUID(10);
             nonUnique = false;
             for (Account a: accounts) {
-                if (uuid.toString().compareTo(a.getUUID()) == 0) {
+                if (uuid.compareTo(a.getUUID()) == 0) {
                     nonUnique = true;
                     break;
                 }
@@ -86,7 +72,20 @@ public class Bank {
 
         } while (nonUnique);
 
-        return uuid.toString();
+        return uuid;
+    }
+
+    /**
+     * Generate a new universally unique ID
+     * @param length the length of unique ID
+     * @return the uuid
+     */
+    private String generateUUID(int length) {
+        StringBuilder uuid = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            uuid.append(((Integer) new Random().nextInt(10)));
+        }
+        return String.valueOf(uuid);
     }
 
     /**
@@ -116,6 +115,12 @@ public class Bank {
         return newUser;
     }
 
+    /**
+     * Get logged-in user object
+     * @param userID the userID for login
+     * @param pin the pin for login
+     * @return the logged-in user
+     */
     public User userLogin(String userID, String pin) {
         for (User u: this.users) {
             if ( u.getUUID().compareTo(userID) == 0 &&
@@ -123,7 +128,6 @@ public class Bank {
                 return u;
             }
         }
-
         return null;
     }
 

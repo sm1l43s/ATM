@@ -1,3 +1,5 @@
+package by.brausov.ATM;
+
 import java.util.Scanner;
 
 public class ATM {
@@ -29,7 +31,7 @@ public class ATM {
         int choice;
 
         do {
-            System.out.printf("Welcome %s", curUser.getFirstName());
+            System.out.printf("Welcome %s %s\n", curUser.getFirstName(), curUser.getLastName());
             System.out.println("(  1) Show account transaction history");
             System.out.println("(  2) Withdrawal");
             System.out.println("(  3) Deposit");
@@ -45,18 +47,10 @@ public class ATM {
         } while (choice < 1 || choice > 5);
 
         switch (choice) {
-            case 1:
-                ATM.showTransHistory(curUser, scanner);
-                break;
-            case 2:
-                ATM.withdrawFunds(curUser, scanner);
-                break;
-            case 3:
-                ATM.depositFunds(curUser, scanner);
-                break;
-            case 4:
-                ATM.transferFunds(curUser, scanner);
-                break;
+            case 1 -> ATM.showTransHistory(curUser, scanner);
+            case 2 -> ATM.withdrawFunds(curUser, scanner);
+            case 3 -> ATM.depositFunds(curUser, scanner);
+            case 4 -> ATM.transferFunds(curUser, scanner);
         }
 
         if (choice != 5) {
@@ -67,7 +61,7 @@ public class ATM {
 
     /**
      * Process a funds deposit to an account
-     * @param curUser the logged-in User object
+     * @param curUser the logged-in by.brausov.ATM.User object
      * @param scanner the Scanner object used for user input
      */
     private static void depositFunds(User curUser, Scanner scanner) {
@@ -104,7 +98,7 @@ public class ATM {
 
     /**
      * Process transferring funds from one account to another
-     * @param curUser the logged-in User object
+     * @param curUser the logged-in by.brausov.ATM.User object
      * @param scanner the Scanner object used for user input
      */
     private static void transferFunds(User curUser, Scanner scanner) {
@@ -151,7 +145,7 @@ public class ATM {
 
     /**
      * Process a fund withdraw from an account
-     * @param curUser the logged-in User object
+     * @param curUser the logged-in by.brausov.ATM.User object
      * @param scanner the Scanner object for user input
      */
     private static void withdrawFunds(User curUser, Scanner scanner) {
@@ -189,7 +183,7 @@ public class ATM {
 
     /**
      * Show the transaction history for an account
-     * @param curUser the logged-in User object
+     * @param curUser the logged-in by.brausov.ATM.User object
      * @param scanner the Scanner object used for user input
      */
     private static void showTransHistory(User curUser, Scanner scanner) {
